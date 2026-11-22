@@ -3,121 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>calculadora</title>
+    <title>Calculadora e IMC</title>
     <style>
         *{
             padding: 0;
             margin: 0;
+            box-sizing: border-box;
         }
         .fundo{
-            background-image: linear-gradient(45deg ,black,blue);
-            height: 100vh;
+            background-image: linear-gradient(135deg, #1a0033, #000000, #001a4d, #330066);
+            background-size: 400% 400%;
+            min-height: 100vh;
             color: white;
             font-family: Arial, Helvetica, sans-serif;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 20px;
         }
-        .calculadora{
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.7);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            border-radius: 15px;
-            padding: 15px;
-        
+        .container-app {
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 0px 25px rgba(100, 50, 200, 0.4);
+            height: 480px;
+            width: 320px;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .botao{
-            width: 50px;
-            height: 50px;
-            background-color: rgb(78, 74, 74);
-            color: white;
-            border-radius: 50%;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        button:hover{
-            background-color: rgb(154, 151, 151);
+        .container-app h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            text-transform: lowercase;
         }
         #resultado{
-            background-color: rgb(154, 151, 151);
-            width: 200px;
-            height: 35px;
-            margin: 12px ;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: 50px;
+            margin-bottom: 15px;
             border-radius: 10px;
-            font-size: 20px;
+            font-size: 24px;
             text-align: right;
-            color: black;
-            
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-       
-       
+        table {
+            width: 100%;
+        }
+        td {
+            padding: 5px;
+            text-align: center;
+        }
+        .botao{
+            width: 55px;
+            height: 55px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .botao:hover{
+            background-color: rgba(255, 255, 255, 0.25);
+        }
 
-
-
-
+        /* Estilos específicos para o painel de IMC */
+        .imc-box {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .input-grupo {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            gap: 5px;
+        }
+        .input-grupo label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .input-grupo input {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            height: 40px;
+            padding: 0 10px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+        .btn-imc {
+            background-color: rgba(100, 50, 200, 0.6);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            height: 45px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 5px;
+        }
+        .btn-imc:hover {
+            background-color: rgba(100, 50, 200, 0.9);
+        }
+        #resultado-imc {
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            min-height: 50px;
+            border-radius: 10px;
+            font-size: 15px;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
-
-
-
 </head>
 <body>
-        <div class="fundo" >
-            <div class="calculadora" >
-                <h1>calculadora</h1>
-                <p id="resultado" ></p>
-                <table>
-                    <tr>
-                        <td><button class="botao" onclick="del()" >Del</button></td>
-                        <td><button class="botao" onclick="clean()" >Clear</button></td>
-                        <td><button class="botao" onclick="insert('/')" >/</button></td>
-                        <td><button class="botao" onclick="insert('*')" >X</button></td>
-                    </tr>
-                    <tr>
-                        <td><button class="botao" onclick="insert('9')" >9</button></td>
-                        <td><button class="botao" onclick="insert('8')" >8</button></td>
-                        <td><button class="botao" onclick="insert('7')" >7</button></td>
-                        <td><button class="botao" onclick="insert ('-')"  >-</button></td>
-                    </tr>
-                    <tr>
-                        <td><button class="botao" onclick="insert('4')" >4</button></td>
-                        <td><button class="botao" onclick="insert('5')" >5</button></td>
-                        <td><button class="botao" onclick="insert('6')" >6</button></td>
-                        <td><button class="botao" onclick="insert ('+')"  >+</button></td>
-                    </tr>  
-                    <tr>
-                        <td><button class="botao" onclick="insert('3')" >3</button></td>
-                        <td><button class="botao" onclick="insert('2')" >2</button></td>
-                        <td><button class="botao" onclick="insert('1')" >1</button></td>
-                        <td rowspan="2" ><button class="botao" style="height: 90px;" onclick="calcular('=')" >=</button></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" ><button class="botao" style="width: 90px;" onclick="insert('0')" >0</button></td>
-                        <td><button class="botao" onclick="insert('.')" >.</button></td>
+    <div class="fundo">
+        <!-- Calculadora Normal -->
+        <div class="container-app">
+            <h1>calculadora</h1>
+            <p id="resultado"></p>
+            <table>
+                <tr>
+                    <td><button class="botao" onclick="del()">Del</button></td>
+                    <td><button class="botao" onclick="clean()">C</button></td>
+                    <td><button class="botao" onclick="insert('/')">/</button></td>
+                    <td><button class="botao" onclick="insert('*')">×</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('7')">7</button></td>
+                    <td><button class="botao" onclick="insert('8')">8</button></td>
+                    <td><button class="botao" onclick="insert('9')">9</button></td>
+                    <td><button class="botao" onclick="insert('-')">-</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('4')">4</button></td>
+                    <td><button class="botao" onclick="insert('5')">5</button></td>
+                    <td><button class="botao" onclick="insert('6')">6</button></td>
+                    <td><button class="botao" onclick="insert('+')">+</button></td>
+                </tr>  
+                <tr>
+                    <td><button class="botao" onclick="insert('1')">1</button></td>
+                    <td><button class="botao" onclick="insert('2')">2</button></td>
+                    <td><button class="botao" onclick="insert('3')">3</button></td>
+                    <td rowspan="2"><button class="botao" style="height: 120px; border-radius: 30px;" onclick="calcular('=')">=</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button class="botao" style="width: 120px; border-radius: 30px;" onclick="insert('0')">0</button></td>
+                    <td><button class="botao" onclick="insert('.')">.</button></td>
+                </tr>
+            </table>
+        </div>
 
-                    </tr>
-                </table>
-                        </div>
+       
+        <div class="container-app">
+            <h1>calculadora imc</h1>
+            <div id="resultado-imc">Insira seus dados</div>
+            <div class="imc-box">
+                <div class="input-grupo">
+                    <label for="peso">Peso (ex: 70)</label>
+                    <input type="number" id="peso" placeholder="Digite seu peso em kg">
                 </div>
-                
-                <script>
-                    function insert (num){
-                        document.getElementById('resultado').innerHTML += num;
+                <div class="input-grupo">
+                    <label for="altura">Altura (ex: 1.75)</label>
+                    <input type="number" id="altura" step="0.01" placeholder="Digite sua altura em metros">
+                </div>
+                <button class="btn-imc" onclick="calcularIMC()">Calcular IMC</button>
+               
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Funções da Calculadora
+        function insert(num){
+            document.getElementById('resultado').innerHTML += num;
+        }
+        function clean(){
+            document.getElementById('resultado').innerHTML = "";
+        }
+        function del(){
+            let resultado = document.getElementById('resultado').innerHTML;
+            document.getElementById('resultado').innerHTML = resultado.substring(0, resultado.length - 1);
+        }
+        function calcular(operacao){
+            let resultado = document.getElementById('resultado').innerHTML;
+            if(resultado){
+                document.getElementById('resultado').innerHTML = eval(resultado);
+            }
+        }
 
-                    }
-                    function clean(){
-                        document.getElementById('resultado').innerHTML = "";
-                    }
-                    function del(){
-                        let resultado = document.getElementById('resultado').innerHTML;
-                        document.getElementById('resultado').innerHTML = resultado.substring(0, resultado.length -1);
-                    }
-                    function calcular (operacao){
-                        let resultado = document.getElementById('resultado').innerHTML;
-                        if(resultado){
-                            document.getElementById('resultado').innerHTML = eval(resultado);
-                        }
-                    }
-                </script>
+       
+        function calcularIMC() {
+            let peso = parseFloat(document.getElementById('peso').value);
+            let altura = parseFloat(document.getElementById('altura').value);
+            let visor = document.getElementById('resultado-imc');
+
+            if (!peso || !altura || peso <= 0 || altura <= 0) {
+                visor.innerHTML = "Preencha peso e altura válidos!";
+                return;
+            }
+
+            let imc = peso / (altura * altura);
+            let classificacao = "";
+
+            if (imc < 18.5) {
+                classificacao = "Abaixo do peso";
+            } else if (imc < 25) {
+                classificacao = "Peso normal";
+            } else if (imc < 30) {
+                classificacao = "Sobrepeso";
+            } else {
+                classificacao = "Obesidade";
+            }
+
+            visor.innerHTML = `IMC: ${imc.toFixed(2)} (${classificacao})`;
+        }
+    </script>
 </body>
 </html>
