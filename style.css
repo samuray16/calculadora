@@ -1,0 +1,45 @@
+#resultado-calc {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 24px;
+    text-align: right;
+    color: white;
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.botoes-calc {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+}
+
+.btn-calc {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    height: 55px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-calc:hover {
+    background-color: rgba(100, 50, 200, 0.6);
+}
+
+.btn-igual {
+    background-color: rgba(100, 50, 200, 0.6);
+    grid-row: span 2;
+    height: 100%;
+}
+
+.btn-zero {
+    grid-column: span 2;
+}
